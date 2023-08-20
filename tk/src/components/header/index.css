@@ -1,0 +1,11 @@
+.header{
+    width: 100vw;
+    background-color: #161717;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family:'Montserrat', sans-serif;
+    font-size: 2vh;
+}

@@ -1,0 +1,71 @@
+.home{
+display: flex;
+flex-direction: column;
+justify-content: baseline;
+margin-top: 10%;
+width: 100vw;
+height: 85vh;
+align-items: center;
+font-family:'Montserrat', sans-serif;
+
+}
+.introduction {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    justify-content: space-between;
+    margin-top: 15%;
+}
+.introduction-left{
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    background-color: #323232;
+    border-radius: 2vh;
+    padding: 2vh
+}
+.introduction-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20vw;
+    background-color: #323232;
+    border-radius: 2vh;
+    padding: 2vh
+}
+.introduction-right h3{
+    font-size: 2vh
+}
+.introduction p {
+    font-size: 1.1vh
+}
+.introduction h2 {
+    font-size: 1.4vh
+}
+
+.home-text{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 80%;
+    height: 20vh;
+    align-items: center;
+}
+.home-book{
+    width: 70%;
+    height: 8vh;
+    background-color: #323232;
+    color: white;
+}
+.home-header{
+    font-size: 6vh;
+    width: 50%
+}
+.home-emoji {
+    height: 12vh;
+    font-size: 12vh
+}
+@media only screen and (max-width: 600px) {
+
+}
