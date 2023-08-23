@@ -2,15 +2,44 @@ import "./index.css";
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { db, auth } from "../../../firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 interface ServiceCardProps {
   service: string;
   price: number;
   desc: Array<string>;
-  times: Array<string>;
 }
-const ServiceCard = ({ service, price, desc, times }: ServiceCardProps) => {
-  const [date, setDate] = useState<object | null>({});
+
+const ServiceCard = ({ service, price, desc }: ServiceCardProps) => {
+  const user = auth.currentUser;
+  const [dateTime, setDateTime] = useState<object | undefined>({
+    name: user?.displayName,
+    service: service,
+    date: "",
+    time: "",
+  });
+
+  const [isBooked, setIsBooked] = useState(false);
+  const availableTimes = [
+    "9:00",
+    "9:45",
+    "10:30",
+    "11:15",
+    "12:00",
+    "12:45",
+    "1:30",
+    "2:15",
+    "3:00",
+    "3:45",
+  ];
+  const formRef = collection(db, "appointments");
+
+  const handleCreateAppointment = async () => {
+    await addDoc(formRef, dateTime);
+    setIsBooked(true);
+  };
+
   return (
     <div className="service-card">
       <div className="top">
@@ -28,7 +57,7 @@ const ServiceCard = ({ service, price, desc, times }: ServiceCardProps) => {
           <MobileDatePicker
             className="date-picker"
             onAccept={(e) => {
-              setDate(e);
+              setDateTime({ ...dateTime, date: e?.format("MM/DD/YYYY") });
             }}
             disablePast
             defaultValue={dayjs(Date.now())}
@@ -36,17 +65,29 @@ const ServiceCard = ({ service, price, desc, times }: ServiceCardProps) => {
         </div>
       </div>
       <div className="time-button-container">
-        {times.map((item, idx) => {
+        {availableTimes.map((item, idx) => {
           return (
-            <button key={idx} className="time-button">
+            <button
+              onClick={() => {
+                setDateTime({ ...dateTime, time: item });
+              }}
+              key={idx}
+              className="time-button"
+            >
               {item}
             </button>
           );
         })}
       </div>
-      <button onClick={() => console.log(date)} className="service-button">
-        Book Appointment
-      </button>
+      {isBooked ? (
+        <p className="booked">
+          You booked for {dateTime.date} at {dateTime.time}
+        </p>
+      ) : (
+        <button onClick={handleCreateAppointment} className="service-button">
+          Book Appointment
+        </button>
+      )}
     </div>
   );
 };

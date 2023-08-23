@@ -62,11 +62,6 @@ const Authentication = ({
           </div>
           <div className="create">
             <input
-              onChange={(e) => handleSetName(e.target.value)}
-              value={name}
-              placeholder="Name"
-            />
-            <input
               onChange={(e) => handleSetEmail(e.target.value)}
               value={email}
               placeholder="Email"

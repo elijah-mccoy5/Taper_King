@@ -9,9 +9,11 @@ import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import "./index.css";
 import Checkout from "./pages/checkout";
+import Admin from "./pages/admin";
 
 function App() {
   const [name, setName] = useState("");
@@ -19,19 +21,35 @@ function App() {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailAlreadyInUse, setEmailAlreadyInUse] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSignInUser = () => {
-    signInWithEmailAndPassword(auth, email, password).then(() => {
-      setIsLoggedIn(true);
-      navigate("/home");
-    });
+    signInWithEmailAndPassword(auth, email, password).then(
+      (userCredentials) => {
+        const user = userCredentials.user;
+        {
+          user.email === "elijah.mccoy5@gmail.com"
+            ? handleAdmin()
+            : navigate("/home");
+        }
+        setIsLoggedIn(true);
+      }
+    );
+  };
+  const handleAdmin = () => {
+    setAdmin(true);
+    navigate("/admin");
   };
 
   const handleCreateUser = () => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: name,
+        });
         setIsLoggedIn(true);
         navigate("/home");
       })
@@ -55,6 +73,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/admin" element={<Admin admin={admin} />} />
         <Route path="/home" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route
