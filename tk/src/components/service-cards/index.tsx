@@ -13,7 +13,12 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ service, price, desc }: ServiceCardProps) => {
   const user = auth.currentUser;
-  const [dateTime, setDateTime] = useState<object | undefined>({
+  const [dateTime, setDateTime] = useState<{
+    date: string | undefined;
+    name?: string | null | undefined;
+    service?: string | undefined;
+    time?: string | undefined;
+  }>({
     name: user?.displayName,
     service: service,
     date: "",
@@ -38,6 +43,7 @@ const ServiceCard = ({ service, price, desc }: ServiceCardProps) => {
   const handleCreateAppointment = async () => {
     await addDoc(formRef, dateTime);
     setIsBooked(true);
+    console.log(dateTime.date);
   };
 
   return (

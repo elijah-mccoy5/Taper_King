@@ -8,14 +8,21 @@ interface adminProps {
 }
 
 const Admin = ({ admin }: adminProps) => {
-  const [appointments, setAppointment] = useState<{ id: string }[]>([]);
+  const [appointments, setAppointment] = useState<
+    { name: string; date: string; time: string }[]
+  >([]);
 
   const appointmentRef = collection(db, "appointments");
 
   const getAppointments = async () => {
     onSnapshot(appointmentRef, (snapshot) => {
       setAppointment(
-        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          name: doc.get("name"),
+          date: doc.get("date"),
+          time: doc.get("time"),
+        }))
       );
     });
   };
@@ -29,20 +36,22 @@ const Admin = ({ admin }: adminProps) => {
         <div className="schedule">
           <h1>📆 Schedule</h1>
           <div className="appointment-container">
-            {appointments.map((item) => (
-              <div className="appoint">
-                <div className="appoint-top">
-                  <p>📆 </p>
-                  <p>⏰</p>
-                  <p>👾</p>
+            {appointments.map((item) => {
+              return (
+                <div className="appoint">
+                  <div className="appoint-top">
+                    <p>📆 </p>
+                    <p>⏰</p>
+                    <p>👾</p>
+                  </div>
+                  <div className="appoint-bottom">
+                    <h2>{item["date"]}</h2>
+                    <p className="appoint-time">{item.time}</p>
+                    <p>{item.name}</p>
+                  </div>
                 </div>
-                <div className="appoint-bottom">
-                  <h2>{item.date}</h2>
-                  <p className="appoint-time">{item.time}</p>
-                  <p>{item.name}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ) : (
