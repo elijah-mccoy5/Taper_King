@@ -1,8 +1,9 @@
 .checkout{
-    height: 120vh;
+    height: 110vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     padding-bottom: 10%;
+    margin-top: 65%;
 }

@@ -5,8 +5,9 @@ const Header = () => {
   return (
     <div className="header">
       <p>
-        <Link style={{ color: "white" }} to="/">
-          ELIJAH MCCOY 👋
+        <Link style={{ color: "white" }} to="/home">
+          ELIJAH MCCOY 🚀
+          {/* 👋 */}
         </Link>
       </p>
     </div>
