@@ -1,4 +1,4 @@
-import ServiceCard from "../../components/service-cards";
+import ServiceCard from "../../components/service-card";
 import "./index.css";
 
 const Checkout = () => {

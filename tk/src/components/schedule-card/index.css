@@ -1,0 +1,64 @@
+.admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family:'Montserrat', sans-serif;
+    height: 90vh
+}
+.appoint{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #323232;
+    width: 80vw;
+    height: 10%;
+    border-radius: 5px;
+    flex-direction: column;
+    margin-bottom: 5%
+}
+.appoint-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+    height: 3vh;
+}
+.appoint-time{
+    margin-left: -5%;
+    margin-right: 4%
+}
+.appoint-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+    height: 3vh;
+}
+.appointment-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    height: 80vh
+}
+.appoint h2{
+    font-size: 1.6vh
+}
+.appoint p{
+    font-size: 1.6vh
+}
+.schedule{
+    display: flex;
+    flex-direction: column;
+    height: 75vh
+}
+.schedule h1{
+    flex:1;
+    text-align: center;
+    font-size: 2vh;
+    margin-bottom: 10%;
+    margin-top: -10%
+}
